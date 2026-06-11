@@ -111,3 +111,27 @@ if final_input:
     # C. Save bot response to history and refresh
     st.session_state.messages.append({"role": "assistant", "content": bot_response})
     st.rerun()
+
+# 6. SECRET ADMIN PANEL (To download your leads)
+st.write("---")
+# Expanders keep the layout clean; users won't see the data unless they click it
+with st.expander("🔒 Admin Panel (Leads Log)"):
+    # You can even set a basic password check here if you want!
+    password = st.text_input("Enter Admin Password:", type="password")
+    
+    if password == "mysecret123": # Change this to whatever password you want
+        if os.path.exists("leads_log.txt"):
+            with open("leads_log.txt", "r", encoding="utf-8") as f:
+                leads_data = f.read()
+            
+            st.text_area("Current Leads:", leads_data, height=200)
+            
+            # This creates a button that lets you download the file directly to your PC
+            st.download_button(
+                label="📥 Download leads_log.txt",
+                data=leads_data,
+                file_name="leads_log.txt",
+                mime="text/plain"
+            )
+        else:
+            st.write("No leads collected yet!")
