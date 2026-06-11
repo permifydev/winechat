@@ -62,59 +62,61 @@ if not st.session_state.waiting_for_email:
                 if st.button(question, key=f"btn_{global_idx}", use_container_width=True):
                     button_pressed = question
 
-# 5. CHAT LOGIC
+# 5. CHAT LOGIC (Using a standard layout box instead of a floating input)
+st.write("---")
+st.write("💬 **Chat Room:**")
+
+# Create a clean side-by-side layout for typing and submitting
 placeholder_text = "Type your email here..." if st.session_state.waiting_for_email else "Type your question here..."
 
-# Create a designated container for the main chat and bot responses
-chat_container = st.container()
+# Form layout forces the text input box and send button to sit on a fixed row
+with st.form(key="chat_form", clear_on_submit=True):
+    chat_cols = st.columns([4, 1]) # 4 parts text box, 1 part button
+    with chat_cols[0]:
+        user_typed_input = st.text_input("", placeholder=placeholder_text, label_visibility="collapsed")
+    with chat_cols[1]:
+        submit_button = st.form_submit_button(label="Send", use_container_width=True)
 
-# Place the input box at the bottom of the chat flow
-user_input = st.chat_input(placeholder_text)
-final_input = button_pressed if button_pressed else user_input
+# Determine what action triggered the message
+final_input = None
+if button_pressed:
+    final_input = button_pressed
+elif submit_button and user_typed_input:
+    final_input = user_typed_input
 
 if final_input:
-    # Append the user message to history
+    # Append user message to history
     st.session_state.messages.append({"role": "user", "content": final_input})
     
     # Process the bot response
-    with chat_container:
-        with st.chat_message("user"):
-            st.markdown(final_input)
+    if st.session_state.waiting_for_email:
+        user_email = final_input.strip()
+        unanswered_question = st.session_state.waiting_for_email
+        
+        log_entry = f"Date: {datetime.now()} | Email: {user_email} | Question: {unanswered_question}\n"
+        with open("leads_log.txt", "a", encoding="utf-8") as f:
+            f.write(log_entry)
             
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            time.sleep(0.6)
-            
-            if st.session_state.waiting_for_email:
-                user_email = final_input.strip()
-                unanswered_question = st.session_state.waiting_for_email
-                
-                log_entry = f"Date: {datetime.now()} | Email: {user_email} | Question: {unanswered_question}\n"
-                with open("leads_log.txt", "a", encoding="utf-8") as f:
-                    f.write(log_entry)
-                    
-                bot_response = "Thank you! I have saved your details. Our team will email you an answer shortly."
-                st.session_state.waiting_for_email = None
-            else:
-                clean_input = final_input.lower().strip()
-                questions_list = list(qa_pairs.keys())
-                
-                best_match = process.extractOne(clean_input, questions_list, scorer=fuzz.WRatio, score_cutoff=70)
-                
-                if best_match:
-                    matched_question = best_match[0]
-                    bot_response = qa_pairs[matched_question]
-                else:
-                    bot_response = "I'm not quite sure about that one. Would you mind leaving your email address so our team can get back to you directly?"
-                    st.session_state.waiting_for_email = final_input
+        bot_response = "Thank you! I have saved your details. Our team will email you an answer shortly."
+        st.session_state.waiting_for_email = None
+    else:
+        clean_input = final_input.lower().strip()
+        questions_list = list(qa_pairs.keys())
+        
+        best_match = process.extractOne(clean_input, questions_list, scorer=fuzz.WRatio, score_cutoff=70)
+        
+        if best_match:
+            matched_question = best_match[0]
+            bot_response = qa_pairs[matched_question]
+        else:
+            bot_response = "I'm not quite sure about that one. Would you mind leaving your email address so our team can get back to you directly?"
+            st.session_state.waiting_for_email = final_input
 
-            st.markdown(bot_response)
-            
     st.session_state.messages.append({"role": "assistant", "content": bot_response})
     st.rerun()
 
-# 6. SECRET ADMIN PANEL (Now pinned cleanly below the input box area)
-st.write("") # Adds a tiny spacer
+# 6. SECRET ADMIN PANEL (Now physically guaranteed to be at the bottom)
+st.write("---")
 with st.expander("🔒 Admin Panel (Leads Log)"):
     password = st.text_input("Enter Admin Password:", type="password")
     
