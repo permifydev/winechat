@@ -64,22 +64,27 @@ if not st.session_state.waiting_for_email:
 
 # 5. CHAT LOGIC
 placeholder_text = "Type your email here..." if st.session_state.waiting_for_email else "Type your question here..."
-user_input = st.chat_input(placeholder_text)
 
+# Create a designated container for the main chat and bot responses
+chat_container = st.container()
+
+# Place the input box at the bottom of the chat flow
+user_input = st.chat_input(placeholder_text)
 final_input = button_pressed if button_pressed else user_input
 
 if final_input:
-    # A. Display the user's input immediately
-    with st.chat_message("user"):
-        st.markdown(final_input)
+    # Append the user message to history
     st.session_state.messages.append({"role": "user", "content": final_input})
-
-    # B. Trigger a realistic "Thinking..." animation
+    
+    # Process the bot response
+    with chat_container:
+        with st.chat_message("user"):
+            st.markdown(final_input)
+            
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            time.sleep(0.6) # Creates a short, realistic 0.6-second delay
+            time.sleep(0.6)
             
-            # Handle Lead Generation Data Saving
             if st.session_state.waiting_for_email:
                 user_email = final_input.strip()
                 unanswered_question = st.session_state.waiting_for_email
@@ -90,8 +95,6 @@ if final_input:
                     
                 bot_response = "Thank you! I have saved your details. Our team will email you an answer shortly."
                 st.session_state.waiting_for_email = None
-
-            # Handle standard questions using Fuzzy Matching
             else:
                 clean_input = final_input.lower().strip()
                 questions_list = list(qa_pairs.keys())
@@ -105,28 +108,23 @@ if final_input:
                     bot_response = "I'm not quite sure about that one. Would you mind leaving your email address so our team can get back to you directly?"
                     st.session_state.waiting_for_email = final_input
 
-            # Display the bot response inside the spinner block
             st.markdown(bot_response)
             
-    # C. Save bot response to history and refresh
     st.session_state.messages.append({"role": "assistant", "content": bot_response})
     st.rerun()
 
-# 6. SECRET ADMIN PANEL (To download your leads)
-st.write("---")
-# Expanders keep the layout clean; users won't see the data unless they click it
+# 6. SECRET ADMIN PANEL (Now pinned cleanly below the input box area)
+st.write("") # Adds a tiny spacer
 with st.expander("🔒 Admin Panel (Leads Log)"):
-    # You can even set a basic password check here if you want!
     password = st.text_input("Enter Admin Password:", type="password")
     
-    if password == "mysecret123": # Change this to whatever password you want
+    if password == "mysecret123":
         if os.path.exists("leads_log.txt"):
             with open("leads_log.txt", "r", encoding="utf-8") as f:
                 leads_data = f.read()
             
             st.text_area("Current Leads:", leads_data, height=200)
             
-            # This creates a button that lets you download the file directly to your PC
             st.download_button(
                 label="📥 Download leads_log.txt",
                 data=leads_data,
