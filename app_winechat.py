@@ -28,7 +28,7 @@ qa_pairs = {
 "Moretta Wines": "Carigno del Maule (Carignan)",
 "MOVI": "Sin info",
 "Peralillo Wines": "Sin info",
-"Schwaderer": "Kimbao Malbec, Pinot Noir, Cabernet Sauvignon, Rose, Chardonnay, Syrah",
+"Schwaderer Wines": "Kimbao Malbec, Pinot Noir, Cabernet Sauvignon, Rose, Chardonnay, Syrah",
 "Token": "Sin info",
 "Viña Choapa": "Sin info",
 "Viña Los Quiscos": "Sin info",
