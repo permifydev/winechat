@@ -10,16 +10,31 @@ st.title("🤖 Hola Wine Lover! 🍷")
 
 # 2. Define your automated questions and answers
 qa_pairs = {
-    "Algorta": "Mala Testa CH de clima frío (Mulchen), Mala Testa GSM Garnacha Syrah Mourvedre , Winemaker Series Wild Carmenere, Winemaker The Blend, y una sorpresa",
+    "Algorta": "Mala Testa Chardonnay, Mala Testa GSM Mezcla Garnacha Syrah Mourvedre , Winemaker Series Wild Carmenere, Winemaker The Blend, y una sorpresa",
 "Almawine": "Sin info",
 "Andes Vineyards": "Sin info",
-"Chateau Potrero Seco": "Cabernet Franc 2015 , Cabernet Sauvignon 2018, Carmenere 2019 , Petit Verdot. 2018, Red Blend 2018 (Sy, Cr, Cs) , Blend 2022 (55%Mb 45%PV) , GSM 2025 Rosé, GSM Red Blend 2025",
+"Chateau Potrero Seco": "Cabernet Franc 2015 , Cabernet Sauvignon 2018, Carmenere 2019 , Petit Verdot. 2018, Mezcla Tinta 2018 (Sy, Cr, Cs) , Mezcla Tinta 2022 (55% Malbec 45% Petit Verdot) , Rosé 2025 GSM, Mezcla Tinta 2025 GSM",
 "De Toro Alexander": "Cabernet 2022 Unoaked, Cabernet 2022 Gran Reserva, Carignan Gran Reserva 2022, Ensamblaje Mediterráneo gran reserva 2022 (73% Syrah, 20% Carignan, 7%Garnacha), Cabernet Gran Reserva 2021",
-"Epifania Mines": "Sin info",
+"Epifania Wines": "Epifanía The Blend, Oowl Carmenere Gran Reserva, Oowl Cabernet Sauvignon Gran Reserva.",
 "Erizo": "Merlot, Chardonnay, Sauvignon Blanc , Syrah, Red Blend,",
 "Faraday": "Peti Verdot Ícono",
 "Garibaldi": "Sin info",
 "Gillmore": "Mariposa Rose, Mariposa Red Blend, Hacedor de Mundos Cabernet Franc, Hacedor de Mundos Merlot, Vigno Carignan",
+"Inawines": "Galla de Pelea 2022, Sauvignon Blanc 2025, Rose 2025, Gravita 2022",
+"Las Perdices": "Sin info",
+"Las Veletas": "Sin info",
+"Laura Hartwig": "Sin info",
+"Le Coq": "Sin info",
+"Moretta Wines": "Carigno del Maule (Carignan)",
+"MOVI": "Sin info",
+"Peralillo Wines": "Sin info",
+"Schwaderer": "Kimbao Malbec, Pinot Noir, Cabernet Sauvignon, Rose, Chardonnay, Syrah",
+"Token": "Sin info",
+"Viña Choapa": "Sin info",
+"Viña Los Quiscos": "Sin info",
+"Rondó Viña y Bodega": "Gran Reserva Cabernet Franc 2025, Gran Reserva Cabernet Sauvignon 2019, Gran Reserva Cabernet Sauvignon 2020, Carmenere  2021 Gran Reserva , Airoso Mezcla Tinta , Sauvignon Blanc",
+"Viña Testaruda": "LasLarra (Merlot  petit verdot), DisTinto (Syrah Sauvignon Blanc), Zorro Correteado (Carmenere Cabernet Franc), Cabra Suelta (Carignan, Syrah, Gernacha), Testaruda (Cabernet Sauvignon, Malbec, Petit Verdot), RaRo (Cabernet Sauvignon, Syrah, Petit Syrah)",
+"Weichafe Wines": "Sauvignon Blanc (varias cosechas), Chardonnay, Pinot Noir 2018 y 1209, Syrah 2022, Cabernet Sauvignon 2023, Syrah 2023, Mezcla Tinta 2022, Fortificado Pinot Noir 2014",
 }
 
 # 3. Create the user chat history & Welcome Message
