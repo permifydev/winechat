@@ -22,7 +22,7 @@ qa_pairs = {
 "Gillmore": "Mariposa Rose, Mariposa Red Blend, Hacedor de Mundos Cabernet Franc, Hacedor de Mundos Merlot, Vigno Carignan",
 "Inawines": "Galla de Pelea 2022, Sauvignon Blanc 2025, Rose 2025, Gravita 2022",
 "Las Perdices": "Sin info",
-"Las Veletas": "Sin info",
+"Las Veletas": "Gran Reserva Carmenere, Gran Reserva Cabernet Sauvignon, Gran Reserva Viognier, Gran Reserva Pais, Grandes Ensamblajes Blend Mediterráneo Grenache Mourvedre Carignan, Grandes Ensamblajes Cabernet Sauvignon Cabernet Franc, Grandes Ensamblajes Petit Verdot Cabernet Franc, Grandes Ensamblajes Malbec Carmenere, Cuartel N°5 Cabernet Franc, Cuartel N°60 Carmenere, Cuartel N°73 Carignan",
 "Laura Hartwig": "Sin info",
 "Le Coq": "Sin info",
 "Moretta Wines": "Carigno del Maule (Carignan)",
